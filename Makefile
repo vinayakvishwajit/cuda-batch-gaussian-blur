@@ -6,14 +6,12 @@ BIN_DIR     := bin
 SRC_DIR     := src
 TARGET      := $(BIN_DIR)/image_processor
 
-# CUDA architecture flags — covers Maxwell through Hopper
-# Adjust sm_XX to match your GPU if needed
-ARCH_FLAGS  := -gencode arch=compute_60,code=sm_60 \
+# CUDA architecture flags — compatible with CUDA 10.x and 11.x lab environments
+# compute_35 kept for older Coursera lab GPUs (deprecated but functional)
+ARCH_FLAGS  := -gencode arch=compute_35,code=compute_35 \
+               -gencode arch=compute_60,code=sm_60 \
                -gencode arch=compute_70,code=sm_70 \
-               -gencode arch=compute_75,code=sm_75 \
-               -gencode arch=compute_80,code=sm_80 \
-               -gencode arch=compute_86,code=sm_86 \
-               -gencode arch=compute_89,code=sm_89
+               -gencode arch=compute_75,code=sm_75
 
 NVCC_FLAGS  := -O2 -std=c++14 $(ARCH_FLAGS)
 
