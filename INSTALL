@@ -1,0 +1,70 @@
+INSTALL — CUDA Batch Gaussian Blur
+===================================
+
+PREREQUISITES
+-------------
+
+All platforms require an NVIDIA GPU with CUDA compute capability >= 6.0.
+
+Linux (Ubuntu 20.04 / 22.04)
+-----------------------------
+
+1. Install the CUDA Toolkit (includes nvcc and NPP):
+
+     https://developer.nvidia.com/cuda-downloads
+
+   Or via the package manager (replace 12-3 with your toolkit version):
+
+     sudo apt-get install cuda-toolkit-12-3
+
+2. Confirm nvcc is on your PATH:
+
+     nvcc --version
+
+3. Install Python 3 and NumPy (for test image generation only):
+
+     sudo apt-get install python3 python3-pip
+     pip3 install numpy
+
+4. Build:
+
+     cd <project-root>
+     make
+
+5. Verify the binary was created:
+
+     ls bin/image_processor
+
+6. Run:
+
+     ./run.sh
+   or
+     ./bin/image_processor --input data/input --output data/output --mask 5
+
+
+AWS / Google Cloud / Coursera Lab Environment
+----------------------------------------------
+
+CUDA Toolkit and NPP are typically pre-installed. Skip step 1 and proceed
+from step 2.
+
+If NPP libraries are missing, install them:
+
+     sudo apt-get install libnpp-dev-12-3   # adjust version number
+
+
+NOTES
+-----
+
+- The Makefile targets GPU architectures sm_60 through sm_89. If your GPU
+  is older (Kepler/Maxwell) or newer (Hopper/Ada), add the appropriate
+  -gencode flag to ARCH_FLAGS in the Makefile.
+
+- If you see "error: NPP header not found", ensure the CUDA include path
+  is set correctly. The default nvcc installation usually handles this
+  automatically.
+
+- Output directory is created automatically by run.sh. When calling the
+  binary directly, create it first:
+
+     mkdir -p data/output

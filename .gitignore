@@ -1,0 +1,24 @@
+# Compiled binary
+bin/
+
+# Build artifacts
+*.o
+*.a
+*.so
+
+# Output images (keep results/ but not bulk output)
+data/output/*.pgm
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
