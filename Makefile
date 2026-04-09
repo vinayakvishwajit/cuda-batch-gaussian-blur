@@ -15,8 +15,8 @@ ARCH_FLAGS  := -gencode arch=compute_35,code=compute_35 \
 
 NVCC_FLAGS  := -O2 -std=c++14 $(ARCH_FLAGS)
 
-# NPP libraries needed for filtering functions
-NPP_LIBS    := -lnppc -lnppif -lnppicc -lnppig
+# NPP static libraries — matches Coursera lab environment
+NPP_LIBS    := -lnppisu_static -lnppif_static -lnppc_static -lculibos
 
 LIBS        := $(NPP_LIBS) -lcudart
 
