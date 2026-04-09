@@ -179,7 +179,7 @@ static bool ApplyGaussianBlur(const PgmImage& src, PgmImage* dst,
 
   // Run NPP Gaussian filter
   NppiSize roi = {w, h};
-  NppMaskSize npp_mask;
+  NppiMaskSize npp_mask;
   switch (mask_size) {
     case 3:  npp_mask = NPP_MASK_SIZE_3_X_3;  break;
     case 5:  npp_mask = NPP_MASK_SIZE_5_X_5;  break;
