@@ -9,7 +9,7 @@
 #   ./run.sh data/input data/output 7
 #   ./run.sh /tmp/images /tmp/blurred 5
 
-set -euo pipefail
+set -eo pipefail
 
 INPUT_DIR="${1:-data/input}"
 OUTPUT_DIR="${2:-data/output}"
@@ -19,11 +19,12 @@ MASK_SIZE="${3:-5}"
 echo "[run.sh] Building..."
 make -j"$(nproc 2>/dev/null || echo 4)"
 
-# ---- Prepare output directory ----
+# ---- Prepare directories ----
+mkdir -p "${INPUT_DIR}"
 mkdir -p "${OUTPUT_DIR}"
 
 # ---- Check for input images ----
-PGM_COUNT=$(find "${INPUT_DIR}" -maxdepth 1 -name "*.pgm" 2>/dev/null | wc -l)
+PGM_COUNT=$(ls "${INPUT_DIR}"/*.pgm 2>/dev/null | wc -l || echo 0)
 if [ "${PGM_COUNT}" -eq 0 ]; then
   echo "[run.sh] No .pgm files found in ${INPUT_DIR}."
   echo "[run.sh] Generating synthetic test images with generate_test_images.py..."
